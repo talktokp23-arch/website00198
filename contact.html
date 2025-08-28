@@ -1,0 +1,245 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Perfect Chess Academy</title>
+    <meta name="description" content="Get in touch with Perfect Chess Academy. Multiple ways to contact us for chess coaching, courses, and tournaments.">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="logo-removebg-preview.png" alt="Perfect Chess Academy Logo" style="height: 50px;">
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="courses.html">Courses</a>
+                <a href="tournaments.html">Tournaments</a>
+                <a href="coaching.html">Coaching</a>
+                <a href="blog.html">Blog</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <button class="mobile-menu-btn">☰</button>
+        </nav>
+    </header>
+
+    <section class="hero" style="min-height: 70vh;">
+        <div class="hero-content">
+            <h1>Get in Touch</h1>
+            <p>Ready to start your chess journey? We're here to help you every step of the way. Contact us through any of the convenient methods below.</p>
+        </div>
+    </section>
+
+    <!-- Contact Methods -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Connect With Us</h2>
+            <p class="section-subtitle">Multiple ways to reach our team for any questions or enrollment inquiries</p>
+        </div>
+        <div class="cards-grid">
+            <div class="card">
+                <span class="card-icon">📧</span>
+                <h3 class="card-title">Email Us</h3>
+                <p class="card-description">Send us detailed questions about courses, coaching, or general inquiries.</p>
+                <div style="margin-top: 1rem;">
+                    <a href="mailto:talktokp23@gmail.com" style="color: var(--accent-primary); font-weight: 500;">talktokp23@gmail.com</a>
+                </div>
+            </div>
+            <div class="card">
+                <span class="card-icon">📱</span>
+                <h3 class="card-title">WhatsApp</h3>
+                <p class="card-description">Quick chat for instant responses and easy communication.</p>
+                <div style="margin-top: 1rem;">
+                    <a href="https://wa.me/919252358993" style="color: var(--accent-primary); font-weight: 500;" target="_blank">+91 92523 58993</a>
+                </div>
+            </div>
+            <div class="card">
+                <span class="card-icon">📍</span>
+                <h3 class="card-title">Visit Us</h3>
+                <p class="card-description">Come see our facilities and meet our coaches in person.</p>
+                <div style="margin-top: 1rem;">
+                    <p style="color: var(--accent-primary); font-weight: 500;">Bikaner, Rajasthan, India</p>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary);">Call ahead to schedule a visit</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Send Us a Message</h2>
+            <p class="section-subtitle">Fill out the form below and we'll get back to you within 24 hours</p>
+        </div>
+        <div class="form-container">
+            <form id="contact-form" action="contact.php" method="POST">
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+                <div class="form-group">
+                    <label for="age">Age (if student)</label>
+                    <input type="number" id="age" name="age" min="5" max="100">
+                </div>
+                <div class="form-group">
+                    <label for="interest">I'm interested in *</label>
+                    <select id="interest" name="interest" required style="width: 100%; padding: 1rem; border: 1px solid var(--border-secondary); border-radius: 0.5rem; background: var(--bg-tertiary); color: var(--text-primary);">
+                        <option value="">Please select...</option>
+                        <option value="beginner-course">Beginner Chess Course</option>
+                        <option value="intermediate-course">Intermediate Training</option>
+                        <option value="advanced-course">Advanced Coaching</option>
+                        <option value="private-coaching">Private Coaching</option>
+                        <option value="tournaments">Tournament Information</option>
+                        <option value="summer-camp">Summer Chess Camp</option>
+                        <option value="family-program">Family Chess Program</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="experience">Chess Experience Level</label>
+                    <select id="experience" name="experience" style="width: 100%; padding: 1rem; border: 1px solid var(--border-secondary); border-radius: 0.5rem; background: var(--bg-tertiary); color: var(--text-primary);">
+                        <option value="">Please select...</option>
+                        <option value="complete-beginner">Complete Beginner</option>
+                        <option value="know-basics">Know Basic Rules</option>
+                        <option value="casual-player">Casual Player</option>
+                        <option value="club-player">Club Player</option>
+                        <option value="tournament-player">Tournament Player</option>
+                        <option value="advanced">Advanced Player</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Your Message *</label>
+                    <textarea id="message" name="message" rows="5" required placeholder="Tell us about your chess goals, any specific questions you have, or what you'd like to know about our programs..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">Send Message</button>
+                <div style="margin-top: 1rem; text-align: center;">
+                    <a href="https://wa.me/919252358993" target="_blank" class="btn btn-secondary" style="background: #25D366; color: white;">💬 Quick Chat on WhatsApp</a>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" style="background: var(--bg-secondary); border-radius: 2rem; border: 1px solid var(--border-secondary);">
+        <div class="section-header">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-subtitle">Quick answers to common questions about our chess academy</p>
+        </div>
+        <div style="max-width: 800px; margin: 0 auto;">
+            <div style="margin-bottom: 2rem; padding: 1.5rem; background: var(--bg-tertiary); border-radius: 1rem;">
+                <h3 style="color: var(--accent-primary); margin-bottom: 0.5rem;">What age groups do you teach?</h3>
+                <p>We welcome students from age 5 to adults. Our programs are designed for all skill levels, from complete beginners to advanced tournament players.</p>
+            </div>
+            <div style="margin-bottom: 2rem; padding: 1.5rem; background: var(--bg-tertiary); border-radius: 1rem;">
+                <h3 style="color: var(--accent-primary); margin-bottom: 0.5rem;">Do you offer online coaching?</h3>
+                <p>Yes! We provide high-quality online coaching sessions using modern chess platforms. This allows us to work with students globally while maintaining the same level of instruction quality.</p>
+            </div>
+            <div style="margin-bottom: 2rem; padding: 1.5rem; background: var(--bg-tertiary); border-radius: 1rem;">
+                <h3 style="color: var(--accent-primary); margin-bottom: 0.5rem;">How quickly can I expect to improve?</h3>
+                <p>Improvement varies by individual, but most students see noticeable progress within 2-3 months of regular training. Dedicated students often achieve significant rating improvements within 6-12 months.</p>
+            </div>
+            <div style="margin-bottom: 2rem; padding: 1.5rem; background: var(--bg-tertiary); border-radius: 1rem;">
+                <h3 style="color: var(--accent-primary); margin-bottom: 0.5rem;">What makes your academy special?</h3>
+                <p>Our combination of experienced grandmaster coaches, personalized training approaches, modern technology, and proven track record of student success sets us apart from other chess academies.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Office Hours -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Academy Hours & Response Times</h2>
+        </div>
+        <div class="cards-grid">
+            <div class="card" style="text-align: center;">
+                <span class="card-icon">🕐</span>
+                <h3 class="card-title">Office Hours</h3>
+                <p class="card-description">Monday - Friday: 9:00 AM - 7:00 PM<br>Saturday: 9:00 AM - 5:00 PM<br>Sunday: Closed</p>
+            </div>
+            <div class="card" style="text-align: center;">
+                <span class="card-icon">⚡</span>
+                <h3 class="card-title">Response Time</h3>
+                <p class="card-description">Email: Within 24 hours<br>WhatsApp: Within 2 hours<br>Contact Form: Within 12 hours</p>
+            </div>
+            <div class="card" style="text-align: center;">
+                <span class="card-icon">📅</span>
+                <h3 class="card-title">Class Schedules</h3>
+                <p class="card-description">Morning: 9:00 AM - 12:00 PM<br>Afternoon: 2:00 PM - 5:00 PM<br>Evening: 6:00 PM - 8:00 PM</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Perfect Chess Academy</h3>
+                <p>Your partner in chess excellence. We're always here to help you achieve your chess goals.</p>
+                <div style="margin-top: 1rem;">
+                    <p>📍 Bikaner, Rajasthan, India</p>
+                    <p>📧 talktokp23@gmail.com</p>
+                    <p>📱 +91 92523 58993</p>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Contact</h3>
+                <ul>
+                    <li><a href="mailto:talltokp23@gmail.com">Send Email</a></li>
+                    <li><a href="https://wa.me/919252358993" target="_blank">WhatsApp Chat</a></li>
+                    <li><a href="#contact-form">Contact Form</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Information</h3>
+                <ul>
+                    <li><a href="courses.html">Course Details</a></li>
+                    <li><a href="coaching.html">Private Coaching</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="blog.html">Chess Blog</a></li>
+                    <li><a href="gallery.html">Photo Gallery</a></li>
+                    <li><a href="tournaments.html">Tournaments</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Perfect Chess Academy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <button class="settings-toggle">⚙️</button>
+    <div class="settings-panel">
+        <div class="settings-header">
+            <h3>Settings</h3>
+            <button class="settings-close">✕</button>
+        </div>
+        <div class="setting-item">
+            <label>Theme</label>
+            <div id="theme-toggle" class="theme-toggle">
+                <span>🌙 Dark Mode</span>
+                <div class="toggle-switch"></div>
+                <span>☀️ Light Mode</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

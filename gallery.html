@@ -1,0 +1,271 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Perfect Chess Academy</title>
+    <meta name="description" content="Photo gallery showcasing our students, tournaments, coaching sessions, and chess academy achievements.">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="logo-removebg-preview.png" alt="Perfect Chess Academy Logo" style="height: 50px;">
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="courses.html">Courses</a>
+                <a href="tournaments.html">Tournaments</a>
+                <a href="coaching.html">Coaching</a>
+                <a href="blog.html">Blog</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <button class="mobile-menu-btn">☰</button>
+        </nav>
+    </header>
+
+    <section class="hero" style="min-height: 70vh;">
+        <div class="hero-content">
+            <h1>Photo Gallery</h1>
+            <p>Capturing moments of chess excellence, student achievements, and memorable events at Perfect Chess Academy</p>
+        </div>
+    </section>
+
+    <!-- Gallery Categories -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Explore Our Journey</h2>
+            <p class="section-subtitle">Years of chess education, tournaments, and student success captured in pictures</p>
+        </div>
+
+        <!-- Tournament Winners -->
+        <div style="margin-bottom: 4rem;">
+            <h3 style="color: var(--accent-primary); font-size: 1.5rem; margin-bottom: 2rem; text-align: center;">🏆 Tournament Champions</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                <div class="card" style="overflow: hidden; padding: 0;">
+                    <div class="gallery-image" style="height: 200px; background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.3)), url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 200%22><rect width=%22400%22 height=%22200%22 fill=%22%23ffd700%22 opacity=%220.1%22/><text x=%2250%25%22 y=%2250%25%22 font-size=%2260%22 fill=%22%23ffd700%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22>🏆</text><text x=%2250%25%22 y=%2270%25%22 font-size=%2216%22 fill=%22%23333%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22>Tournament Victory</text></svg>'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; position: relative;">
+                        <div style="position: absolute; top: 10px; right: 10px; background: rgba(255, 215, 0, 0.9); color: #333; padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.75rem; font-weight: 600;">📸 Photo</div>
+                    </div>
+                    <div style="padding: 1.5rem;">
+                        <h3>State Championship 2024</h3>
+                        <p style="color: var(--text-secondary);">Our student Arjun wins the Under-16 State Championship with a perfect 7/7 score</p>
+                        <small style="color: var(--text-muted);">December 2024</small>
+                    </div>
+                </div>
+                <div class="card" style="overflow: hidden; padding: 0;">
+                    <div style="height: 200px; background: linear-gradient(135deg, #4CAF50, #66BB6A); display: flex; align-items: center; justify-content: center; font-size: 4rem; color: white;">♚</div>
+                    <div style="padding: 1.5rem;">
+                        <h3>National Youth Tournament</h3>
+                        <p style="color: var(--text-secondary);">Three students qualify for national level competition representing our academy</p>
+                        <small style="color: var(--text-muted);">November 2024</small>
+                    </div>
+                </div>
+                <div class="card" style="overflow: hidden; padding: 0;">
+                    <div style="height: 200px; background: linear-gradient(135deg, #2196F3, #42A5F5); display: flex; align-items: center; justify-content: center; font-size: 4rem; color: white;">🏅</div>
+                    <div style="padding: 1.5rem;">
+                        <h3>Regional Team Victory</h3>
+                        <p style="color: var(--text-secondary);">Perfect Chess Academy team wins the inter-academy championship</p>
+                        <small style="color: var(--text-muted);">October 2024</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Coaching Sessions -->
+        <div style="margin-bottom: 4rem;">
+            <h3 style="color: var(--accent-primary); font-size: 1.5rem; margin-bottom: 2rem; text-align: center;">👨‍🏫 Coaching Sessions</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                <div class="card" style="overflow: hidden; padding: 0;">
+                    <div class="gallery-image" style="height: 200px; background: linear-gradient(135deg, rgba(255, 87, 34, 0.1), rgba(255, 87, 34, 0.3)), url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 200%22><rect width=%22400%22 height=%22200%22 fill=%22%23FF5722%22 opacity=%220.1%22/><circle cx=%22100%22 cy=%2260%22 r=%2215%22 fill=%22%23FF5722%22 opacity=%220.6%22/><circle cx=%22150%22 cy=%2280%22 r=%2212%22 fill=%22%23FF5722%22 opacity=%220.4%22/><circle cx=%22200%22 cy=%2270%22 r=%2218%22 fill=%22%23FF5722%22 opacity=%220.5%22/><rect x=%22280%22 y=%2250%22 width=%2280%22 height=%2260%22 rx=%225%22 fill=%22%23FF5722%22 opacity=%220.3%22/><text x=%22320%22 y=%2280%22 font-size=%2212%22 fill=%22%23fff%22 text-anchor=%22middle%22>♞ ♝ ♜</text><text x=%2250%25%22 y=%22150%22 font-size=%2214%22 fill=%22%23FF5722%22 text-anchor=%22middle%22>GM Coaching Session</text></svg>'); background-size: cover; background-position: center; position: relative;">
+                        <div style="position: absolute; top: 10px; right: 10px; background: rgba(255, 87, 34, 0.9); color: white; padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.75rem; font-weight: 600;">📸 Photo</div>
+                    </div>
+                    <div style="padding: 1.5rem;">
+                        <h3>Grandmaster Masterclass</h3>
+                        <p style="color: var(--text-secondary);">Special session with GM Rajesh Kumar on advanced endgame techniques</p>
+                        <small style="color: var(--text-muted);">January 2025</small>
+                    </div>
+                </div>
+                <div class="card" style="overflow: hidden; padding: 0;">
+                    <div style="height: 200px; background: linear-gradient(135deg, #9C27B0, #BA68C8); display: flex; align-items: center; justify-content: center; font-size: 4rem; color: white;">🎯</div>
+                    <div style="padding: 1.5rem;">
+                        <h3>Tactical Training Workshop</h3>
+                        <p style="color: var(--text-secondary);">Intensive puzzle solving session with intermediate level students</p>
+                        <small style="color: var(--text-muted);">December 2024</small>
+                    </div>
+                </div>
+                <div class="card" style="overflow: hidden; padding: 0;">
+                    <div style="height: 200px; background: linear-gradient(135deg, #607D8B, #78909C); display: flex; align-items: center; justify-content: center; font-size: 4rem; color: white;">👥</div>
+                    <div style="padding: 1.5rem;">
+                        <h3>Group Study Session</h3>
+                        <p style="color: var(--text-secondary);">Students collaborating and learning from each other in our modern facility</p>
+                        <small style="color: var(--text-muted);">November 2024</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Academy Events -->
+        <div style="margin-bottom: 4rem;">
+            <h3 style="color: var(--accent-primary); font-size: 1.5rem; margin-bottom: 2rem; text-align: center;">🎉 Academy Events</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                <div class="card" style="overflow: hidden; padding: 0;">
+                    <div style="height: 200px; background: linear-gradient(135deg, #FFC107, #FFD54F); display: flex; align-items: center; justify-content: center; font-size: 4rem; color: #333;">🎂</div>
+                    <div style="padding: 1.5rem;">
+                        <h3>15th Anniversary Celebration</h3>
+                        <p style="color: var(--text-secondary);">Celebrating 15 years of chess excellence with students, parents, and coaches</p>
+                        <small style="color: var(--text-muted);">September 2024</small>
+                    </div>
+                </div>
+                <div class="card" style="overflow: hidden; padding: 0;">
+                    <div style="height: 200px; background: linear-gradient(135deg, #8BC34A, #AED581); display: flex; align-items: center; justify-content: center; font-size: 4rem; color: white;">🏕️</div>
+                    <div style="padding: 1.5rem;">
+                        <h3>Summer Chess Camp 2024</h3>
+                        <p style="color: var(--text-secondary);">Two weeks of intensive chess training combined with fun activities and friendships</p>
+                        <small style="color: var(--text-muted);">June 2024</small>
+                    </div>
+                </div>
+                <div class="card" style="overflow: hidden; padding: 0;">
+                    <div style="height: 200px; background: linear-gradient(135deg, #FF9800, #FFB74D); display: flex; align-items: center; justify-content: center; font-size: 4rem; color: white;">👨‍👩‍👧‍👦</div>
+                    <div style="padding: 1.5rem;">
+                        <h3>Family Chess Day</h3>
+                        <p style="color: var(--text-secondary);">Parents and children playing together in our special family tournament</p>
+                        <small style="color: var(--text-muted);">May 2024</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Student Achievements -->
+        <div style="margin-bottom: 4rem;">
+            <h3 style="color: var(--accent-primary); font-size: 1.5rem; margin-bottom: 2rem; text-align: center;">⭐ Student Achievements</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                <div class="card" style="overflow: hidden; padding: 0;">
+                    <div style="height: 200px; background: linear-gradient(135deg, #E91E63, #F06292); display: flex; align-items: center; justify-content: center; font-size: 4rem; color: white;">🎓</div>
+                    <div style="padding: 1.5rem;">
+                        <h3>Rating Milestone Celebration</h3>
+                        <p style="color: var(--text-secondary);">Priya achieves her first 2000+ rating after 2 years of dedicated training</p>
+                        <small style="color: var(--text-muted);">January 2025</small>
+                    </div>
+                </div>
+                <div class="card" style="overflow: hidden; padding: 0;">
+                    <div style="height: 200px; background: linear-gradient(135deg, #00BCD4, #4DD0E1); display: flex; align-items: center; justify-content: center; font-size: 4rem; color: white;">🌟</div>
+                    <div style="padding: 1.5rem;">
+                        <h3>First Tournament Victory</h3>
+                        <p style="color: var(--text-secondary);">8-year-old Rohan wins his very first chess tournament with our beginner students</p>
+                        <small style="color: var(--text-muted);">December 2024</small>
+                    </div>
+                </div>
+                <div class="card" style="overflow: hidden; padding: 0;">
+                    <div style="height: 200px; background: linear-gradient(135deg, #795548, #A1887F); display: flex; align-items: center; justify-content: center; font-size: 4rem; color: white;">🎖️</div>
+                    <div style="padding: 1.5rem;">
+                        <h3>Scholarship Winner</h3>
+                        <p style="color: var(--text-secondary);">Talented student receives chess scholarship for higher education based on achievements</p>
+                        <small style="color: var(--text-muted);">November 2024</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics -->
+    <section class="section" style="background: var(--bg-secondary); border-radius: 2rem; border: 1px solid var(--border-secondary);">
+        <div class="section-header">
+            <h2 class="section-title">Gallery by Numbers</h2>
+            <p class="section-subtitle">Our visual journey through the years</p>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number" data-target="500">0</div>
+                <div class="stat-label">Photos Captured</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-target="50">0</div>
+                <div class="stat-label">Tournament Events</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-target="200">0</div>
+                <div class="stat-label">Victory Moments</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-target="15">0</div>
+                <div class="stat-label">Years Documented</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section" style="text-align: center;">
+        <h2 class="section-title">Be Part of Our Success Story</h2>
+        <p class="section-subtitle">Join Perfect Chess Academy and create your own memorable moments</p>
+        <div style="margin-top: 2rem;">
+            <a href="contact.html" class="btn btn-primary">Join Our Academy</a>
+            <a href="tournaments.html" class="btn btn-secondary" style="margin-left: 1rem;">View Tournaments</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Perfect Chess Academy</h3>
+                <p>Creating memorable chess experiences and celebrating every achievement.</p>
+                <div style="margin-top: 1rem;">
+                    <p>📍 Bikaner, Rajasthan, India</p>
+                    <p>📧 talktokp23@gmail.com</p>
+                    <p>📱 +91 92523 58993</p>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Gallery</h3>
+                <ul>
+                    <li><a href="#">Tournament Winners</a></li>
+                    <li><a href="#">Coaching Sessions</a></li>
+                    <li><a href="#">Academy Events</a></li>
+                    <li><a href="#">Student Achievements</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Events</h3>
+                <ul>
+                    <li><a href="#">Tournaments</a></li>
+                    <li><a href="#">Summer Camps</a></li>
+                    <li><a href="#">Masterclasses</a></li>
+                    <li><a href="#">Family Days</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Join Us</h3>
+                <ul>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="coaching.html">Private Coaching</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Perfect Chess Academy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <button class="settings-toggle">⚙️</button>
+    <div class="settings-panel">
+        <div class="settings-header">
+            <h3>Settings</h3>
+            <button class="settings-close">✕</button>
+        </div>
+        <div class="setting-item">
+            <div id="theme-toggle" class="theme-toggle">
+                <span>🌙 Dark Mode</span>
+                <div class="toggle-switch"></div>
+                <span>☀️ Light Mode</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

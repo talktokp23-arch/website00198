@@ -1,0 +1,578 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Chronicles - Perfect Chess Academy</title>
+    <meta name="description" content="Master the game through strategy, stories, and expert insights from our academy">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .blog-hero {
+            position: relative;
+            background: linear-gradient(135deg, #1c1c38 0%, #4e54c8 50%, #8b5cf6 100%);
+            border-radius: 32px;
+            padding: 80px 40px;
+            margin: 32px auto;
+            max-width: 960px;
+            text-align: center;
+            overflow: hidden;
+            box-shadow: 0 12px 72px rgba(44,44,74,0.3);
+        }
+
+        .blog-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255,215,0,0.1) 0%, transparent 70%);
+            animation: rotateGlow 10s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes rotateGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .blog-hero * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .search-filter-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .search-box {
+            position: relative;
+            max-width: 400px;
+            flex: 1;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            border: 2px solid var(--border-secondary);
+            border-radius: 50px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+        }
+
+        .search-box::before {
+            content: '🔍';
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+
+        .category-filters {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--border-secondary);
+            border-radius: 25px;
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            border-color: var(--accent-primary);
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+        }
+
+        .blog-card {
+            background: rgba(255,255,255,0.08);
+            border: 2px solid transparent;
+            border-radius: 24px;
+            padding: 30px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,215,0,0.2), transparent);
+            transition: left 0.6s ease;
+            z-index: 0;
+        }
+
+        .blog-card:hover::before {
+            left: 100%;
+        }
+
+        .blog-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(255,215,0,0.3);
+        }
+
+        .blog-card h3 {
+            color: var(--accent-primary);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .blog-card p {
+            color: #ecececdd;
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: var(--accent-primary);
+            position: relative;
+            z-index: 1;
+        }
+
+        .read-time {
+            background: rgba(255,215,0,0.2);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-weight: bold;
+        }
+
+        .category-tag {
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+
+        .page-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--border-secondary);
+            border-radius: 8px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .page-btn:hover,
+        .page-btn.active {
+            border-color: var(--accent-primary);
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+        }
+
+        .floating-chess-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -2;
+            opacity: 0.03;
+        }
+
+        .chess-piece-bg {
+            position: absolute;
+            font-size: 8rem;
+            color: var(--accent-primary);
+            animation: floatSlow 20s ease-in-out infinite;
+        }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(5deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating chess background -->
+    <div class="floating-chess-bg">
+        <div class="chess-piece-bg" style="top: 10%; left: 5%; animation-delay: 0s;">♛</div>
+        <div class="chess-piece-bg" style="top: 60%; left: 85%; animation-delay: 5s;">♚</div>
+        <div class="chess-piece-bg" style="top: 30%; left: 70%; animation-delay: 10s;">♞</div>
+    </div>
+
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="logo-removebg-preview.png" alt="Perfect Chess Academy Logo" style="height: 50px;">
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="courses.html">Courses</a>
+                <a href="tournaments.html">Tournaments</a>
+                <a href="coaching.html">Coaching</a>
+                <a href="blog.html">Blog</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <button class="mobile-menu-btn">☰</button>
+        </nav>
+    </header>
+
+    <section class="blog-hero">
+        <h1>Chess Chronicles</h1>
+        <p>Master the game through strategy, stories, and expert insights from our academy</p>
+    </section>
+
+    <!-- Search and Filter Bar -->
+    <section class="section">
+        <div class="search-filter-bar">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search articles...">
+            </div>
+            <div class="category-filters">
+                <button class="filter-btn active" data-category="all">All</button>
+                <button class="filter-btn" data-category="strategy">Strategy</button>
+                <button class="filter-btn" data-category="tactics">Tactics</button>
+                <button class="filter-btn" data-category="openings">Openings</button>
+                <button class="filter-btn" data-category="endgames">Endgames</button>
+                <button class="filter-btn" data-category="students">Students</button>
+                <button class="filter-btn" data-category="tournaments">Tournaments</button>
+            </div>
+        </div>
+
+        <!-- Latest Articles -->
+        <div class="section-header">
+            <h2 class="section-title">Latest Articles</h2>
+            <p class="section-subtitle">Fresh insights and strategies from our chess experts</p>
+        </div>
+
+        <div id="blogContainer">
+            <!-- Featured Article -->
+            <div class="blog-card" data-category="strategy" data-link="blog-opening-tricks.html">
+                <div class="category-tag">Strategy</div>
+                <h3>🚀 Master Opening Tricks That Win Games</h3>
+                <p>Discover powerful opening moves that can give you a decisive advantage in the first 10 moves of the game. Learn the psychology behind strong openings and how to catch your opponents off-guard.</p>
+                <div class="blog-meta">
+                    <span>📅 Dec 20, 2024</span>
+                    <span class="read-time">⏱ 8 min read</span>
+                </div>
+            </div>
+
+            <!-- Student Spotlight -->
+            <div class="blog-card" data-category="students" data-link="blog-student-highlights.html">
+                <div class="category-tag">Students</div>
+                <h3>⭐ Rising Stars: Student Success Stories</h3>
+                <p>Meet our talented students who are making waves in local and national tournaments. From first-time players to championship winners, these inspiring stories showcase the power of dedication and proper training.</p>
+                <div class="blog-meta">
+                    <span>📅 Dec 18, 2024</span>
+                    <span class="read-time">⏱ 6 min read</span>
+                </div>
+            </div>
+
+            <!-- Tactical Training -->
+            <div class="blog-card" data-category="tactics">
+                <div class="category-tag">Tactics</div>
+                <h3>🧩 Advanced Tactical Patterns Every Player Should Know</h3>
+                <p>Dive deep into complex tactical motifs including deflection, decoy, and clearance sacrifices. Master these patterns to calculate combinations with confidence and precision.</p>
+                <div class="blog-meta">
+                    <span>📅 Dec 15, 2024</span>
+                    <span class="read-time">⏱ 12 min read</span>
+                </div>
+            </div>
+
+            <!-- Parent's Guide -->
+            <div class="blog-card" data-category="strategy" data-link="blog-parent-guide.html">
+                <div class="category-tag">Parents</div>
+                <h3>👨‍👩‍👧‍👦 Complete Parent's Guide to Supporting Young Chess Players</h3>
+                <p>Essential tips for parents on how to support your child's chess journey, create a positive learning environment, and foster their love for the game without overwhelming them.</p>
+                <div class="blog-meta">
+                    <span>📅 Dec 12, 2024</span>
+                    <span class="read-time">⏱ 10 min read</span>
+                </div>
+            </div>
+
+            <!-- Endgame Mastery -->
+            <div class="blog-card" data-category="endgames">
+                <div class="category-tag">Endgames</div>
+                <h3>♔ Essential Endgame Principles for Rating Improvement</h3>
+                <p>Master the fundamental endgame concepts that separate strong players from beginners. Learn key positions, calculation techniques, and strategic principles that will transform your endgame play.</p>
+                <div class="blog-meta">
+                    <span>📅 Dec 10, 2024</span>
+                    <span class="read-time">⏱ 15 min read</span>
+                </div>
+            </div>
+
+            <!-- Tournament Prep -->
+            <div class="blog-card" data-category="tournaments">
+                <div class="category-tag">Tournaments</div>
+                <h3>🏆 Tournament Preparation: Mental and Physical Strategies</h3>
+                <p>Comprehensive guide to preparing for competitive chess tournaments. Covers everything from opening preparation and time management to dealing with tournament nerves and maintaining peak performance.</p>
+                <div class="blog-meta">
+                    <span>📅 Dec 8, 2024</span>
+                    <span class="read-time">⏱ 11 min read</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <button class="page-btn" onclick="changePage(-1)">← Previous</button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn" onclick="changePage(1)">Next →</button>
+        </div>
+    </section>
+
+    <!-- Chess Learning Tips -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Chess Learning Resources</h2>
+            <p class="section-subtitle">Curated tools and tips for accelerated improvement</p>
+        </div>
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">🧩</div>
+                <h3 class="card-title">Daily Tactical Puzzles</h3>
+                <p class="card-description">Solve 3-5 tactical puzzles every day to sharpen your pattern recognition and calculation skills. Start with easier puzzles and gradually increase difficulty.</p>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">📚</div>
+                <h3 class="card-title">Annotated Master Games</h3>
+                <p class="card-description">Study annotated games by grandmasters to understand positional concepts, strategic planning, and decision-making processes in different phases of the game.</p>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">⚡</div>
+                <h3 class="card-title">Active Playing Practice</h3>
+                <p class="card-description">Play different time controls regularly - classical for deep thinking, rapid for practical skills, and blitz for pattern recognition and intuition development.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <h3 class="card-title">Game Analysis Tools</h3>
+                <p class="card-description">Use chess engines and analysis software to review your games, identify mistakes, and understand key moments that determined the outcome.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Perfect Chess Academy</h3>
+                <p>Sharing knowledge and insights to help you master the royal game.</p>
+                <div style="margin-top: 1rem;">
+                    <p>📍 Bikaner, Rajasthan, India</p>
+                    <p>📧 talktokp23@gmail.com</p>
+                    <p>📱 +91 92523 58993</p>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Blog Categories</h3>
+                <ul>
+                    <li><a href="#">Opening Theory</a></li>
+                    <li><a href="#">Tactical Training</a></li>
+                    <li><a href="#">Endgame Studies</a></li>
+                    <li><a href="#">Student Success</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Learning Resources</h3>
+                <ul>
+                    <li><a href="courses.html">Online Courses</a></li>
+                    <li><a href="coaching.html">Private Coaching</a></li>
+                    <li><a href="#">Practice Games</a></li>
+                    <li><a href="#">Video Lessons</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="https://wa.me/919252358993" target="_blank">WhatsApp</a></li>
+                    <li><a href="#">Newsletter</a></li>
+                    <li><a href="#">Community Forum</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Perfect Chess Academy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <button class="settings-toggle">⚙️</button>
+    <div class="settings-panel">
+        <div class="settings-header">
+            <h3>Settings</h3>
+            <button class="settings-close">✕</button>
+        </div>
+        <div class="setting-item">
+            <div id="theme-toggle" class="theme-toggle">
+                <span>🌙 Dark Mode</span>
+                <div class="toggle-switch"></div>
+                <span>☀️ Light Mode</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Blog-specific functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const blogCards = document.querySelectorAll('.blog-card');
+
+            // Search functionality
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                blogCards.forEach(card => {
+                    const title = card.querySelector('h3').textContent.toLowerCase();
+                    const content = card.querySelector('p').textContent.toLowerCase();
+                    const category = card.getAttribute('data-category');
+                    
+                    if (title.includes(searchTerm) || content.includes(searchTerm) || category.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+
+            // Category filter functionality
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const category = this.getAttribute('data-category');
+                    
+                    blogCards.forEach(card => {
+                        if (category === 'all' || card.getAttribute('data-category') === category) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Blog card click navigation
+            blogCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const link = this.getAttribute('data-link');
+                    if (link) {
+                        window.location.href = link;
+                    }
+                });
+            });
+        });
+
+        let currentPage = 1;
+        const cardsPerPage = 3; // Define how many blog cards per page
+
+        function displayPage(page) {
+            const blogCards = document.querySelectorAll('#blogContainer .blog-card');
+            const totalPages = Math.ceil(blogCards.length / cardsPerPage);
+
+            // Hide all cards
+            blogCards.forEach(card => card.style.display = 'none');
+
+            // Calculate start and end index for current page
+            const startIndex = (page - 1) * cardsPerPage;
+            const endIndex = startIndex + cardsPerPage;
+
+            // Display cards for the current page
+            for (let i = startIndex; i < endIndex && i < blogCards.length; i++) {
+                blogCards[i].style.display = 'block';
+            }
+
+            // Update pagination buttons
+            const pageBtns = document.querySelectorAll('.pagination .page-btn');
+            pageBtns.forEach(btn => btn.classList.remove('active'));
+
+            // Activate current page number button
+            const currentPageBtn = document.querySelector(`.pagination .page-btn:nth-child(${page + 1})`); // +1 because of prev button
+            if (currentPageBtn) {
+                currentPageBtn.classList.add('active');
+            }
+
+            // Enable/disable prev/next buttons
+            document.querySelector('.pagination .page-btn:first-child').disabled = (page === 1);
+            document.querySelector('.pagination .page-btn:last-child').disabled = (page === totalPages);
+        }
+
+        function changePage(direction) {
+            const blogCards = document.querySelectorAll('#blogContainer .blog-card');
+            const totalPages = Math.ceil(blogCards.length / cardsPerPage);
+            
+            currentPage += direction;
+
+            if (currentPage < 1) {
+                currentPage = 1;
+            } else if (currentPage > totalPages) {
+                currentPage = totalPages;
+            }
+            displayPage(currentPage);
+        }
+
+        // Initial display on load
+        document.addEventListener('DOMContentLoaded', () => {
+            displayPage(currentPage);
+
+            // Add event listeners for page number buttons
+            document.querySelectorAll('.pagination .page-btn:not(:first-child):not(:last-child)').forEach((btn, index) => {
+                btn.addEventListener('click', () => {
+                    currentPage = index + 1;
+                    displayPage(currentPage);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

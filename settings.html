@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings & Preferences - Perfect Chess Academy</title>
+    <meta name="description" content="Customize your learning experience with personalized settings and preferences.">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .settings-hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #4e54c8 50%, #8b5cf6 100%);
+            border-radius: 2rem;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin: 2rem auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .settings-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
+            animation: rotate 15s linear infinite;
+        }
+
+        .settings-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .settings-sidebar {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-secondary);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .settings-nav {
+            list-style: none;
+        }
+
+        .settings-nav li {
+            margin-bottom: 0.5rem;
+        }
+
+        .settings-nav a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .settings-nav a:hover,
+        .settings-nav a.active {
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+        }
+
+        .settings-content {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-secondary);
+            border-radius: 1rem;
+            padding: 2rem;
+        }
+
+        .settings-section {
+            display: none;
+        }
+
+        .settings-section.active {
+            display: block;
+        }
+
+        .settings-section h3 {
+            color: var(--accent-primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .setting-group {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-secondary);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .setting-group h4 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-secondary);
+        }
+
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+
+        .setting-info {
+            flex: 1;
+        }
+
+        .setting-label {
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .setting-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .setting-control {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .toggle-switch {
+            width: 50px;
+            height: 25px;
+            background: var(--border-secondary);
+            border-radius: 25px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .toggle-switch.active {
+            background: var(--accent-primary);
+        }
+
+        .toggle-switch::before {
+            content: '';
+            width: 21px;
+            height: 21px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-switch.active::before {
+            transform: translateX(25px);
+        }
+
+        .setting-select {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-secondary);
+            border-radius: 0.5rem;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-width: 150px;
+        }
+
+        .setting-input {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-secondary);
+            border-radius: 0.5rem;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-width: 200px;
+        }
+
+        .color-picker {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--border-secondary);
+            border-radius: 50%;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .color-picker input {
+            width: 100%;
+            height: 100%;
+            border: none;
+            cursor: pointer;
+        }
+
+        .preset-colors {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .preset-color {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .preset-color:hover,
+        .preset-color.active {
+            border-color: var(--text-primary);
+            transform: scale(1.1);
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--bg-primary);
+            margin-bottom: 1rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .stat-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-secondary);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .notification-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-secondary);
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .notification-icon {
+            font-size: 1.5rem;
+        }
+
+        .notification-content {
+            flex: 1;
+        }
+
+        .export-btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .export-btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .danger-zone {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .danger-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .gallery-upload-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-secondary);
+            border-radius: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .gallery-upload-container h4 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .drop-zone {
+            border: 2px dashed var(--border-secondary);
+            border-radius: 0.5rem;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .drop-zone:hover {
+            border-color: var(--accent-primary);
+            background: var(--bg-hover);
+        }
+
+        .drop-zone p {
+            margin: 0;
+            color: var(--text-secondary);
+        }
+
+        .upload-button {
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .upload-button:hover {
+            background: var(--accent-hover);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .gallery-item {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-secondary);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-item-info {
+            padding: 0.75rem;
+            text-align: center;
+        }
+
+        .gallery-item-title {
+            font-weight: 500;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .gallery-item-description {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .delete-gallery-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(239, 68, 68, 0.8);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            font-size: 12px;
+            line-height: 25px;
+            text-align: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .delete-gallery-btn {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .settings-container {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .settings-sidebar {
+                position: static;
+            }
+
+            .settings-nav {
+                display: flex;
+                overflow-x: auto;
+                gap: 0.5rem;
+                padding-bottom: 0.5rem;
+            }
+
+            .settings-nav li {
+                margin-bottom: 0;
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="logo-removebg-preview.png" alt="Perfect Chess Academy Logo" style="height: 50px;">
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="courses.html">Courses</a>
+                <a href="tournaments.html">Tournaments</a>
+                <a href="coaching.html">Coaching</a>
+                <a href="blog.html">Blog</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <button class="mobile-menu-btn">☰</button>
+        </nav>
+    </header>
+
+    <section class="settings-hero">
+        <h1>Settings & Preferences</h1>
+        <p>Customize your learning experience and manage your account settings</p>
+    </section>
+
+    <section class="section">
+        <div class="settings-container">
+            <!-- Sidebar Navigation -->
+            <div class="settings-sidebar">
+                <ul class="settings-nav">
+                    <li><a href="#profile" class="nav-link active" data-section="profile">👤 Profile</a></li>
+                    <li><a href="#appearance" class="nav-link" data-section="appearance">🎨 Appearance</a></li>
+                    <li><a href="#notifications" class="nav-link" data-section="notifications">🔔 Notifications</a></li>
+                    <li><a href="#privacy" class="nav-link" data-section="privacy">🔒 Privacy</a></li>
+                    <li><a href="#learning" class="nav-link" data-section="learning">📚 Learning</a></li>
+                    <li><a href="#account" class="nav-link" data-section="account">⚙️ Account</a></li>
+                </ul>
+            </div>
+
+            <!-- Settings Content -->
+            <div class="settings-content">
+                <!-- Profile Section -->
+                <div id="profile" class="settings-section active">
+                    <h3>Profile Settings</h3>
+
+                    <div class="setting-group">
+                        <h4>Personal Information</h4>
+
+                        <div style="display: flex; align-items: center; gap: 2rem; margin-bottom: 2rem;">
+                            <div class="profile-avatar">👤</div>
+                            <div>
+                                <button class="export-btn">Upload Photo</button>
+                                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">JPG, PNG up to 2MB</p>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Full Name</div>
+                                <div class="setting-description">Your display name</div>
+                            </div>
+                            <div class="setting-control">
+                                <input type="text" class="setting-input" value="John Doe" placeholder="Enter your name">
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Email Address</div>
+                                <div class="setting-description">Primary contact email</div>
+                            </div>
+                            <div class="setting-control">
+                                <input type="email" class="setting-input" value="john@example.com" placeholder="Enter email">
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Chess Rating</div>
+                                <div class="setting-description">Your current FIDE or national rating</div>
+                            </div>
+                            <div class="setting-control">
+                                <input type="number" class="setting-input" placeholder="1800" style="width: 100px;">
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Skill Level</div>
+                                <div class="setting-description">Select your current chess level</div>
+                            </div>
+                            <div class="setting-control">
+                                <select class="setting-select">
+                                    <option>Beginner</option>
+                                    <option>Intermediate</option>
+                                    <option>Advanced</option>
+                                    <option>Expert</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
+                        <h4>Chess Statistics</h4>
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-number">156</div>
+                                <div class="stat-label">Games Played</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">67%</div>
+                                <div class="stat-label">Win Rate</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">12</div>
+                                <div class="stat-label">Tournaments</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">1856</div>
+                                <div class="stat-label">Peak Rating</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Appearance Section -->
+                <div id="appearance" class="settings-section">
+                    <h3>Appearance & Theme</h3>
+
+                    <div class="setting-group">
+                        <h4>Color Theme</h4>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Dark Mode</div>
+                                <div class="setting-description">Switch between light and dark themes</div>
+                            </div>
+                            <div class="setting-control">
+                                <div id="themeToggle" class="toggle-switch"></div>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Accent Color</div>
+                                <div class="setting-description">Choose your preferred accent color</div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="color-picker">
+                                    <input type="color" value="#ffd700" id="accentColor">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="preset-colors">
+                            <div class="preset-color active" style="background: #ffd700;" data-color="#ffd700"></div>
+                            <div class="preset-color" style="background: #4CAF50;" data-color="#4CAF50"></div>
+                            <div class="preset-color" style="background: #2196F3;" data-color="#2196F3"></div>
+                            <div class="preset-color" style="background: #E91E63;" data-color="#E91E63"></div>
+                            <div class="preset-color" style="background: #9C27B0;" data-color="#9C27B0"></div>
+                            <div class="preset-color" style="background: #FF5722;" data-color="#FF5722"></div>
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
+                        <h4>Display Options</h4>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Font Size</div>
+                                <div class="setting-description">Adjust text size for better readability</div>
+                            </div>
+                            <div class="setting-control">
+                                <select class="setting-select">
+                                    <option>Small</option>
+                                    <option selected>Medium</option>
+                                    <option>Large</option>
+                                    <option>Extra Large</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Animation Effects</div>
+                                <div class="setting-description">Enable smooth animations and transitions</div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="toggle-switch active"></div>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Reduced Motion</div>
+                                <div class="setting-description">Minimize animations for accessibility</div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="toggle-switch"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notifications Section -->
+                <div id="notifications" class="settings-section">
+                    <h3>Notification Preferences</h3>
+
+                    <div class="setting-group">
+                        <h4>Email Notifications</h4>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Tournament Updates</div>
+                                <div class="setting-description">Receive updates about upcoming tournaments</div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="toggle-switch active"></div>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Course Announcements</div>
+                                <div class="setting-description">New courses and lesson updates</div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="toggle-switch active"></div>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Weekly Chess Tips</div>
+                                <div class="setting-description">Weekly newsletter with chess strategies</div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="toggle-switch"></div>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Marketing Emails</div>
+                                <div class="setting-description">Promotional content and special offers</div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="toggle-switch"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
+                        <h4>Push Notifications</h4>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Game Reminders</div>
+                                <div class="setting-description">Reminders for scheduled games and lessons</div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="toggle-switch active"></div>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Achievement Notifications</div>
+                                <div class="setting-description">Celebrate your chess milestones</div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="toggle-switch active"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Privacy Section -->
+                <div id="privacy" class="settings-section">
+                    <h3>Privacy & Security</h3>
+
+                    <div class="setting-group">
+                        <h4>Profile Visibility</h4>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Public Profile</div>
+                                <div class="setting-description">Make your profile visible to other users</div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="toggle-switch active"></div>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Show Rating</div>
+                                <div class="setting-description">Display your chess rating publicly</div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="toggle-switch active"></div>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Game History</div>
+                                <div class="setting-description">Allow others to view your game history</div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="toggle-switch"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
+                        <h4>Data & Analytics</h4>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Usage Analytics</div>
+                                <div class="setting-description">Help improve our platform with anonymous usage data</div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="toggle-switch active"></div>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Performance Tracking</div>
+                                <div class="setting-description">Track your learning progress and improvements</div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="toggle-switch active"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Learning Section -->
+                <div id="learning" class="settings-section">
+                    <h3>Learning Preferences</h3>
+
+                    <div class="setting-group">
+                        <h4>Study Settings</h4>
+
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Difficulty Level</div>
+                                <div class="setting-description">Puzzle and exercise difficulty</div>
+                            </div>
+                            <div class="setting-control">
+                                <select class="setting-select">
+                                    <option>Easy</option>
+                                    <option selected>Medium</option>
+                                    <option>Hard</option>
+                                    <option>Mixed</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Auto-Advance Lessons</div>
+                                <div class="setting-description">Automatically move to next lesson when ready</div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="toggle-switch active"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
+                        <h4>Game Analysis</h4>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Auto-Analysis</div>
+                                <div class="setting-description">Automatically analyze games after completion</div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="toggle-switch active"></div>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Mistake Notifications</div>
+                                <div class="setting-description">Get notified about significant mistakes</div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="toggle-switch active"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Management Section -->
+                <div id="gallery-management" class="settings-section">
+                    <h3>Gallery Management</h3>
+                    <div class="gallery-upload-container">
+                        <h4>Upload New Photos</h4>
+                        <div class="drop-zone">
+                            <p>Drag and drop photos here, or click to select files</p>
+                            <input type="file" id="galleryUpload" accept="image/*" multiple style="display: none;">
+                            <button class="upload-button">Select Files</button>
+                        </div>
+                    </div>
+                    <div class="gallery-grid">
+                        <!-- Placeholder for gallery items -->
+                        <div class="gallery-item">
+                            <img src="https://via.placeholder.com/150/4e54c8/ffffff?text=Chess+Image+1" alt="Chess Image 1">
+                            <div class="gallery-item-info">
+                                <div class="gallery-item-title">Tournament Hall</div>
+                                <div class="gallery-item-description">Scenes from the National Championship</div>
+                            </div>
+                            <button class="delete-gallery-btn">X</button>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://via.placeholder.com/150/8b5cf6/ffffff?text=Chess+Image+2" alt="Chess Image 2">
+                            <div class="gallery-item-info">
+                                <div class="gallery-item-title">Practice Session</div>
+                                <div class="gallery-item-description">Players during intense practice</div>
+                            </div>
+                            <button class="delete-gallery-btn">X</button>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://via.placeholder.com/150/2196F3/ffffff?text=Chess+Image+3" alt="Chess Image 3">
+                            <div class="gallery-item-info">
+                                <div class="gallery-item-title">Master Class</div>
+                                <div class="gallery-item-description">Grandmaster sharing insights</div>
+                            </div>
+                            <button class="delete-gallery-btn">X</button>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://via.placeholder.com/150/4CAF50/ffffff?text=Chess+Image+4" alt="Chess Image 4">
+                            <div class="gallery-item-info">
+                                <div class="gallery-item-title">Kids' Corner</div>
+                                <div class="gallery-item-description">Young talents learning chess</div>
+                            </div>
+                            <button class="delete-gallery-btn">X</button>
+                        </div>
+                        <!-- Add more gallery items as needed -->
+                    </div>
+                </div>
+
+                <!-- Privacy Section -->
+                <div id="privacy" class="settings-section">
+                    <h3>Privacy & Security</h3>
+
+                    <div class="setting-group">
+                        <h4>Profile Visibility</h4>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Public Profile</div>
+                                <div class="setting-description">Make your profile visible to other users</div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="toggle-switch active"></div>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Show Rating</div>
+                                <div class="setting-description">Display your chess rating publicly</div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="toggle-switch active"></div>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Game History</div>
+                                <div class="setting-description">Allow others to view your game history</div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="toggle-switch"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
+                        <h4>Data & Analytics</h4>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Usage Analytics</div>
+                                <div class="setting-description">Help improve our platform with anonymous usage data</div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="toggle-switch active"></div>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Performance Tracking</div>
+                                <div class="setting-description">Track your learning progress and improvements</div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="toggle-switch active"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Learning Section -->
+                <div id="learning" class="settings-section">
+                    <h3>Learning Preferences</h3>
+
+                    <div class="setting-group">
+                        <h4>Study Settings</h4>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Daily Study Goal</div>
+                                <div class="setting-description">Minutes of chess study per day</div>
+                            </div>
+                            <div class="setting-control">
+                                <select class="setting-select">
+                                    <option>15 minutes</option>
+                                    <option selected>30 minutes</option>
+                                    <option>45 minutes</option>
+                                    <option>60 minutes</option>
+                                    <option>90 minutes</option>
+                                    <option>120 minutes</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Preferred Time Control</div>
+                                <div class="setting-description">Your favorite time control for practice games</div>
+                            </div>
+                            <div class="setting-control">
+                                <select class="setting-select">
+                                    <option>Bullet (1-2 min)</option>
+                                    <option>Blitz (3-5 min)</option>
+                                    <option selected>Rapid (10-15 min)</option>
+                                    <option>Classical (30+ min)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Difficulty Level</div>
+                                <div class="setting-description">Puzzle and exercise difficulty</div>
+                            </div>
+                            <div class="setting-control">
+                                <select class="setting-select">
+                                    <option>Easy</option>
+                                    <option selected>Medium</option>
+                                    <option>Hard</option>
+                                    <option>Mixed</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Auto-Advance Lessons</div>
+                                <div class="setting-description">Automatically move to next lesson when ready</div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="toggle-switch active"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
+                        <h4>Game Analysis</h4>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Auto-Analysis</div>
+                                <div class="setting-description">Automatically analyze games after completion</div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="toggle-switch active"></div>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Mistake Notifications</div>
+                                <div class="setting-description">Get notified about significant mistakes</div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="toggle-switch active"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Account Section -->
+                <div id="account" class="settings-section">
+                    <h3>Account Management</h3>
+
+                    <div class="setting-group">
+                        <h4>Security</h4>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Change Password</div>
+                                <div class="setting-description">Update your account password</div>
+                            </div>
+                            <div class="setting-control">
+                                <button class="export-btn">Change Password</button>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Two-Factor Authentication</div>
+                                <div class="setting-description">Add extra security to your account</div>
+                            </div>
+                            <div class="setting-control">
+                                <button class="export-btn">Enable 2FA</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
+                        <h4>Data Management</h4>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Export Data</div>
+                                <div class="setting-description">Download your chess games and progress data</div>
+                            </div>
+                            <div class="setting-control">
+                                <button class="export-btn">Export Data</button>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-label">Backup Games</div>
+                                <div class="setting-description">Create backup of all your chess games</div>
+                            </div>
+                            <div class="setting-control">
+                                <button class="export-btn">Create Backup</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Danger Zone -->
+                    <div class="danger-zone">
+                        <h4 style="color: #ef4444;">Danger Zone</h4>
+                        <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                            These actions are irreversible. Please be careful.
+                        </p>
+
+                        <div class="setting-item" style="border: none;">
+                            <div class="setting-info">
+                                <div class="setting-label" style="color: #ef4444;">Delete Account</div>
+                                <div class="setting-description">Permanently delete your account and all data</div>
+                            </div>
+                            <div class="setting-control">
+                                <button class="danger-btn">Delete Account</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Perfect Chess Academy</h3>
+                <p>Customize your learning experience with our comprehensive settings and preferences.</p>
+                <div style="margin-top: 1rem;">
+                    <p>📍 Bikaner, Rajasthan, India</p>
+                    <p>📧 talktokp23@gmail.com</p>
+                    <p>📱 +91 92523 58993</p>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Account</h3>
+                <ul>
+                    <li><a href="#">Profile Settings</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Data Export</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Preferences</h3>
+                <ul>
+                    <li><a href="#">Appearance</a></li>
+                    <li><a href="#">Notifications</a></li>
+                    <li><a href="#">Learning Goals</a></li>
+                    <li><a href="#">Game Settings</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="contact.html">Contact Support</a></li>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Report Bug</a></li>
+                    <li><a href="#">Feature Request</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Perfect Chess Academy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <button class="settings-toggle">⚙️</button>
+    <div class="settings-panel">
+        <div class="settings-header">
+            <h3>Quick Settings</h3>
+            <button class="settings-close">✕</button>
+        </div>
+        <div class="setting-item">
+            <div id="theme-toggle" class="theme-toggle">
+                <span>🌙 Dark Mode</span>
+                <div class="toggle-switch"></div>
+                <span>☀️ Light Mode</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="universal-settings.js"></script>
+    <script>
+        // Settings page specific functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('.settings-section');
+            const galleryUploadInput = document.getElementById('galleryUpload');
+            const galleryDropZone = document.querySelector('.drop-zone');
+            const galleryGrid = document.querySelector('.gallery-grid');
+
+            // Navigation functionality
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    // Remove active class from all links and sections
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    sections.forEach(s => s.classList.remove('active'));
+
+                    // Add active class to clicked link
+                    this.classList.add('active');
+
+                    // Show corresponding section
+                    const sectionId = this.getAttribute('data-section');
+                    document.getElementById(sectionId).classList.add('active');
+
+                    // Update URL hash
+                    window.location.hash = sectionId;
+                });
+            });
+
+            // Gallery Upload Functionality
+            galleryUploadInput.addEventListener('change', function(e) {
+                handleFiles(e.target.files);
+            });
+
+            galleryDropZone.addEventListener('click', () => {
+                galleryUploadInput.click();
+            });
+
+            galleryDropZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                galleryDropZone.style.backgroundColor = 'rgba(0, 0, 0, 0.05)';
+            });
+
+            galleryDropZone.addEventListener('dragleave', () => {
+                galleryDropZone.style.backgroundColor = 'transparent';
+            });
+
+            galleryDropZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                galleryDropZone.style.backgroundColor = 'transparent';
+                handleFiles(e.dataTransfer.files);
+            });
+
+            function handleFiles(files) {
+                if (!files || files.length === 0) return;
+
+                Array.from(files).forEach((file, index) => {
+                    if (file.type.startsWith('image/')) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            const imgUrl = e.target.result;
+                            const galleryItem = document.createElement('div');
+                            galleryItem.classList.add('gallery-item');
+                            galleryItem.innerHTML = `
+                                <img src="${imgUrl}" alt="Gallery Image ${index + 1}">
+                                <div class="gallery-item-info">
+                                    <div class="gallery-item-title">${file.name}</div>
+                                    <div class="gallery-item-description">Uploaded on ${new Date().toLocaleDateString()}</div>
+                                </div>
+                                <button class="delete-gallery-btn">X</button>
+                            `;
+                            // Add event listener to the delete button
+                            galleryItem.querySelector('.delete-gallery-btn').addEventListener('click', function() {
+                                galleryItem.remove();
+                            });
+                            galleryGrid.appendChild(galleryItem);
+                        };
+                        reader.readAsDataURL(file);
+                    } else {
+                        alert(`Skipping non-image file: ${file.name}`);
+                    }
+                });
+            }
+
+            // Delete gallery item functionality
+            document.querySelectorAll('.delete-gallery-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    this.closest('.gallery-item').remove();
+                });
+            });
+
+            // Handle URL hash on page load
+            const hash = window.location.hash.substr(1);
+            if (hash) {
+                const targetLink = document.querySelector(`[data-section="${hash}"]`);
+                if (targetLink) {
+                    targetLink.click();
+                }
+            }
+
+            // Form submissions
+            document.querySelectorAll('.export-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const action = this.textContent;
+                    alert(`${action} feature coming soon!`);
+                });
+            });
+
+            document.querySelector('.danger-btn').addEventListener('click', function() {
+                if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+                    alert('Account deletion feature will be implemented with proper security measures.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
